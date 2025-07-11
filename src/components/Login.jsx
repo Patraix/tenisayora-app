@@ -8,7 +8,10 @@ function Login({ onLoginSuccess }) {
 
   // ¡IMPORTANTE! Reemplaza con la URL de tu Google Apps Script Web App
   // Esta URL se obtiene después de desplegar tu script de Google Apps Script.
-  const GOOGLE_APPS_SCRIPT_URL = "/api";
+  const GOOGLE_APPS_SCRIPT_URL = import.meta.env.DEV
+    ? "/api"
+    : "https://script.google.com/macros/s/AKfycb.../exec";
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage({ type: "", text: "" }); // Limpiar mensajes anteriores
