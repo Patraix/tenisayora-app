@@ -1,0 +1,120 @@
+@import url('https://unpkg.com/purecss@2.1.0/build/pure-min.css');
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  color: #333;
+  box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho/alto */
+}
+
+#root {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%; /* Asegura que el contenedor ocupe el ancho disponible */
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #0a4a86; /* Color de Pure.css */
+  margin-bottom: 25px;
+}
+
+.pure-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.pure-form input[type="text"],
+.pure-form input[type="password"] {
+  width: calc(100% - 20px); /* Ajusta el ancho para el padding */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+.pure-button-primary {
+  background-color: #0078e7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: auto; /* Permite que el botón se ajuste a su contenido */
+  display: inline-block; /* Para centrarlo si es necesario */
+}
+
+.pure-button-primary:hover {
+  background-color: #005bb5;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.message.error {
+  background-color: #ffe0e0;
+  color: #d8000c;
+  border: 1px solid #d8000c;
+}
+
+.message.success {
+  background-color: #e0ffe0;
+  color: #008000;
+  border: 1px solid #008000;
+}
+
+.dashboard-data p {
+  margin: 10px 0;
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.dashboard-data strong {
+  color: #0a4a86;
+}
+
+.logout-button {
+  background-color: #f44336;
+  margin-top: 20px;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    margin: 10px;
+  }
+  .pure-form input[type="text"],
+  .pure-form input[type="password"] {
+    width: calc(100% - 20px);
+  }
+}
