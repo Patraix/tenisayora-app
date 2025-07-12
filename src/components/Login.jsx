@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState("");
@@ -12,57 +13,43 @@ function Login({ onLoginSuccess }) {
     ? "/api"
     : "https://script.google.com/macros/s/AKfycbx2vaSnkov3GiKDmqEtbfhDCc06uoA5_20FTL7bjbvBone3ylLo-r8h6aMLBPwwhkRb/exec";
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setMessage({ type: "", text: "" }); // Limpiar mensajes anteriores
     setIsLoading(true);
-
-    // Validar que la URL de Apps Script ha sido actualizada
-    if (GOOGLE_APPS_SCRIPT_URL === "TU_URL_DE_APPS_SCRIPT_AQUI") {
-      setMessage({
-        type: "error",
-        text: "Por favor, actualiza GOOGLE_APPS_SCRIPT_URL en Login.jsx con la URL de tu Google Apps Script.",
-      });
-      setIsLoading(false);
-      return;
-    }
+    setMessage({ type: "", text: "" });
 
     try {
       const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
         method: "POST",
-        // 'cors' es crucial para que el navegador permita la petición entre tu app React (localhost)
-        // y los servidores de Google Apps Script.
-        mode: "cors",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "text/plain",
         },
         body: JSON.stringify({
-          action: "login", // Indica al script que realice la acción de login
-          username: username,
-          password: password,
+          action: "login",
+          username,
+          password,
         }),
       });
 
-      const data = await response.json(); // Parsear la respuesta JSON del script
+      const data = await response.json();
 
       if (data.success) {
         setMessage({ type: "success", text: data.message });
-        // Si el login es exitoso, llama a la función onLoginSuccess
-        // para pasar los datos del usuario al componente padre (App.jsx)
-        onLoginSuccess(data.userData);
+        onLoginSuccess(data.userData); // Guarda datos en estado
+        navigate("/dashboard"); // 👈 Redirige tras login
       } else {
-        // Si el login falla, muestra el mensaje de error del script
         setMessage({ type: "error", text: data.message });
       }
     } catch (error) {
-      // Captura cualquier error de red o de la petición
       console.error("Error al intentar iniciar sesión:", error);
       setMessage({
         type: "error",
         text: "Error de conexión. Inténtalo de nuevo.",
       });
     } finally {
-      setIsLoading(false); // Desactiva el estado de carga
+      setIsLoading(false);
     }
   };
 

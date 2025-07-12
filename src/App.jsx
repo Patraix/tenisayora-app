@@ -7,7 +7,10 @@ function App() {
   // Estado para controlar si el usuario está logueado
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // Estado para almacenar los datos del usuario logueado
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(() => {
+    const saved = localStorage.getItem("userData");
+    return saved ? JSON.parse(saved) : null;
+  });
 
   // useEffect para manejar la persistencia del login con localStorage
   useEffect(() => {
