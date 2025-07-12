@@ -1,45 +1,39 @@
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
+import React from "react";
 
-function App() {
-  const [userData, setUserData] = useState(null);
-
-  const handleLoginSuccess = (data) => {
-    setUserData(data);
-  };
-
-  const handleLogout = () => {
-    setUserData(null);
-  };
+function Dashboard({ userData, onLogout }) {
+  if (!userData) {
+    return (
+      <div className="container message error">
+        No se encontraron datos de usuario.
+      </div>
+    );
+  }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            userData ? (
-              <Navigate to="/dashboard" />
-            ) : (
-              <Login onLoginSuccess={handleLoginSuccess} />
-            )
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            userData ? (
-              <Dashboard userData={userData} onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div className="container">
+      <h2>
+        Bienvenido
+        {userData["Número socio"] ||
+          userData["Número Socio"] ||
+          userData["socio"]}
+      </h2>
+
+      <div className="dashboard-data">
+        {Object.entries(userData).map(([key, value]) => (
+          <p key={key}>
+            <strong>{key}:</strong> {value}
+          </p>
+        ))}
+      </div>
+
+      <button
+        onClick={onLogout}
+        className="pure-button pure-button-primary logout-button"
+      >
+        Salir
+      </button>
+    </div>
   );
 }
 
-export default App;
+export default Dashboard;

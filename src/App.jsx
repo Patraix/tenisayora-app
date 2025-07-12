@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const [userData, setUserData] = React.useState(() => {
