@@ -10,7 +10,7 @@ function Login({ onLoginSuccess }) {
   // Esta URL se obtiene después de desplegar tu script de Google Apps Script.
   const GOOGLE_APPS_SCRIPT_URL = import.meta.env.DEV
     ? "/api"
-    : "https://script.google.com/macros/s/AKfycb.../exec";
+    : "https://script.google.com/macros/s/AKfycbx2vaSnkov3GiKDmqEtbfhDCc06uoA5_20FTL7bjbvBone3ylLo-r8h6aMLBPwwhkRb/exec";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
