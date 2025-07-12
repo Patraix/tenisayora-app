@@ -49,25 +49,43 @@ function Login({ onLoginSuccess }) {
 
   return (
     <div className="container">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Usuario"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Cargando..." : "Entrar"}
-        </button>
+      <h1>Club de tenis Ayora</h1>
+      <h2>Consulta de datos</h2>
+      <form className="pure-form pure-form-stacked" onSubmit={handleSubmit}>
+        <fieldset>
+          <label htmlFor="username">Número de Socio:</label>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder="Ej: 100"
+          />
+
+          <label htmlFor="password">Contraseña:</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Ej: 12345678P"
+          />
+
+          <button
+            type="submit"
+            className="pure-button pure-button-primary"
+            disabled={isLoading}
+          >
+            {isLoading ? "Validando.." : "Consultar"}
+          </button>
+        </fieldset>
       </form>
-      {message.text && <p className={message.type}>{message.text}</p>}
+      {/* Muestra mensajes de éxito o error */}
+      {message.text && (
+        <div className={`message ${message.type}`}>{message.text}</div>
+      )}
     </div>
   );
 }

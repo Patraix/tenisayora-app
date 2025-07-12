@@ -12,7 +12,7 @@ function Dashboard({ userData, onLogout }) {
   return (
     <div className="container">
       <h2>
-        Bienvenido
+        Su consulta
         {userData["Número socio"] ||
           userData["Número Socio"] ||
           userData["socio"]}
